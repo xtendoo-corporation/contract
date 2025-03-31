@@ -1,0 +1,30 @@
+<odoo>
+    <record id="contract_dow_monday" model="contract.dow">
+        <field name="name">Lunes</field>
+        <field name="dow">0</field>
+    </record>
+    <record id="contract_dow_tuesday" model="contract.dow">
+        <field name="name">Martes</field>
+        <field name="dow">1</field>
+    </record>
+    <record id="contract_dow_wednesday" model="contract.dow">
+        <field name="name">Miércoles</field>
+        <field name="dow">2</field>
+    </record>
+    <record id="contract_dow_thursday" model="contract.dow">
+        <field name="name">Jueves</field>
+        <field name="dow">3</field>
+    </record>
+    <record id="contract_dow_friday" model="contract.dow">
+        <field name="name">Viernes</field>
+        <field name="dow">4</field>
+    </record>
+    <record id="contract_dow_saturday" model="contract.dow">
+        <field name="name">Sábado</field>
+        <field name="dow">5</field>
+    </record>
+    <record id="contract_dow_sunday" model="contract.dow">
+        <field name="name">Domingo</field>
+        <field name="dow">6</field>
+    </record>
+</odoo>
