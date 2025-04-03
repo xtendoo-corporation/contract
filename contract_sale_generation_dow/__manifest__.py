@@ -1,9 +1,9 @@
 {
     "name": "Contract Sale Generation with Day of Week",
-    "version": "18.0.1.0.0",  # Cambiado a un formato correcto de versión
+    "version": "18.0.1.0.0",
     "category": "Contract Management",
-    "author": "Xtendoo Software S.L., Odoo Community Association (OCA)",  # Agregado OCA
-    "license": "AGPL-3",  # Añadido tipo de licencia compatible
+    "author": "Xtendoo Software S.L., Odoo Community Association (OCA)",
+    "license": "AGPL-3",
     "website": "https://github.com/OCA/contract",
     "depends": ["contract_sale_generation"],
     "data": [

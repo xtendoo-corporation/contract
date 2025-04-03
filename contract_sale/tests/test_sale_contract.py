@@ -32,7 +32,7 @@ class TestSaleContract(TransactionCase):
         )
 
         cls.pricelist = cls.env["product.pricelist"].create(
-            {"name": "pricelist for contract test"}
+            {"name": "pricelist for contract tests"}
         )
 
         cls.partner = cls.env["res.partner"].create(

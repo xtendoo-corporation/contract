@@ -1,6 +1,3 @@
-# © 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
-# Copyright 2017 Pesol (<http://pesol.es>)
-# Copyright 2017 Angel Moya <angel.moya@pesol.es>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from freezegun import freeze_time
 
@@ -12,9 +9,7 @@ def to_date(date):
     return fields.Date.to_date(date)
 
 
-class ContractSaleCommon:
-    # Use case : Prepare some data for current tests case
-
+class ContractSaleDowCommon:
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -33,9 +28,7 @@ class ContractSaleCommon:
         )
         contract_date = "2020-01-15"
         cls.pricelist = cls.env["product.pricelist"].create(
-            {
-                "name": "pricelist for contract tests",
-            }
+            {"name": "pricelist for contract tests"}
         )
         cls.partner = cls.env["res.partner"].create(
             {
@@ -79,6 +72,10 @@ class ContractSaleCommon:
                 "base": "list_price",
             }
         )
+        # Crear días de la semana.
+        cls.dow_monday = cls.env["contract.dow"].create({"name": "Lunes", "dow": 0})
+        cls.dow_tuesday = cls.env["contract.dow"].create({"name": "Martes", "dow": 1})
+
         cls.contract = cls.env["contract.contract"].create(
             {
                 "name": "Test Contract",
@@ -88,6 +85,7 @@ class ContractSaleCommon:
                 "sale_autoconfirm": False,
                 "group_id": cls.analytic_account.id,
                 "date_start": "2020-01-15",
+                "contract_dow_ids": [(6, 0, [cls.dow_monday.id, cls.dow_tuesday.id])],
             }
         )
         cls.line_vals = {
@@ -103,9 +101,12 @@ class ContractSaleCommon:
             "recurring_next_date": "2020-01-15",
             "display_type": False,
         }
-        discount_line_group_id = cls.env.ref("product.group_discount_per_so_line")
-        uom_group_id = cls.env.ref("uom.group_uom")
-        cls.env.user.groups_id = [(4, discount_line_group_id.id), (4, uom_group_id.id)]
+        # discount_line_group_id = cls.env.ref("product.group_discount_per_so_line")
+        # uom_group_id = cls.env.ref("uom.group_uom")
+        # cls.env.user.groups_id = [
+        #     (4, discount_line_group_id.id),
+        #     (4, uom_group_id.id)
+        # ]
 
         with Form(cls.contract) as contract_form, freeze_time(contract_date):
             contract_form.contract_template_id = cls.template
@@ -148,5 +149,6 @@ class ContractSaleCommon:
                         },
                     )
                 ],
+                "contract_dow_ids": [(6, 0, [cls.dow_monday.id])],
             }
         )
