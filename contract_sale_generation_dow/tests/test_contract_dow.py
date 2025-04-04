@@ -8,65 +8,47 @@ from .common import ContractSaleDowCommon
 
 
 class TestContractDow(ContractSaleDowCommon, TransactionCase):
-    def _create_contract_line_and_run_test(self, day_offset, expected_invoice=True):
+    def _get_invoices_created_by_contract(self, day_offset):
         """
-        Create a contract line and run the test for invoice creation on a specific date.
+        Get the invoices created by the contract for a specific day of the week.
 
         :param day_offset:
             Number of days to add to the Monday (0 for Monday, 1 for Tuesday, etc.)
-        :param expected_invoice:
-            Boolean indicating if an invoice is expected (True) or not (False)
+
+        :return:
+            List of invoices created for the contract.
         """
-        contrato = self.contract
+        # Calculate the Monday of the current week
+        monday = date.today() - timedelta(days=date.today().weekday())
 
-        # Se crea una línea de contrato lista para la generación en el día especificado
-        self.env["contract.line"].create(
-            {
-                "contract_id": contrato.id,
-                "name": f'Servicio semanal '
-                f'{["lunes", "martes", "miércoles"][day_offset]}',
-                "product_id": self.product_1.id,
-                "quantity": 1,
-                "recurring_rule_type": "weekly",
-                "recurring_interval": 1,
-                "date_start": date.today() - timedelta(days=7),
-                "recurring_next_date": date.today() - timedelta(days=6),
-            }
-        )
+        # Calculate the test date based on the offset
+        test_day = monday + timedelta(days=day_offset)
 
-        # Calcular el lunes de la semana actual
-        hoy = date.today()
-        lunes = hoy - timedelta(days=hoy.weekday())
-
-        # Calcular el día correspondiente sumando el offset al lunes
-        test_day = lunes + timedelta(days=day_offset)
-
-        # Congelar el tiempo en la fecha de prueba.
+        # Freeze the time to the test date
         with freeze_time(test_day):
-            contrato._cron_recurring_create()
-            facturas = self.env["account.move"].search(
-                [("invoice_origin", "=", contrato.name)]
+            self.contract._cron_recurring_create(None, create_type="sale")
+            invoices = self.env["sale.order"].search(
+                [("origin", "=", self.contract.name)]
             )
-            if expected_invoice:
-                self.assertTrue(
-                    facturas,
-                    f"No se generó factura en "
-                    f"{['lunes', 'martes', 'miércoles'][day_offset]}"
-                    f" para el contrato.",
-                )
-            else:
-                self.assertFalse(
-                    facturas,
-                    f"Se generó factura en "
-                    f"{['lunes', 'martes', 'miércoles'][day_offset]}"
-                    f" para el contrato.",
-                )
+        return invoices
 
     def test_recurring_invoice_creation_on_monday(self):
-        self._create_contract_line_and_run_test(day_offset=0)
+        invoices = self._get_invoices_created_by_contract(day_offset=0)
+        self.assertTrue(
+            invoices,
+            "ERROR: Not invoice generated on Monday for the contract.",
+        )
 
     def test_recurring_invoice_creation_on_tuesday(self):
-        self._create_contract_line_and_run_test(day_offset=1)
+        invoices = self._get_invoices_created_by_contract(day_offset=1)
+        self.assertTrue(
+            invoices,
+            "ERROR: Not invoice generated on Tuesday for the contract.",
+        )
 
     def test_recurring_invoice_creation_on_wednesday(self):
-        self._create_contract_line_and_run_test(day_offset=2, expected_invoice=False)
+        invoices = self._get_invoices_created_by_contract(day_offset=3)
+        self.assertFalse(
+            invoices,
+            "ERROR: Invoice generated on Wednesday for the contract.",
+        )

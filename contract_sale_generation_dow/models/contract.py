@@ -18,15 +18,12 @@ class ContractContract(models.Model):
     @api.model
     def _get_contracts_to_invoice_domain(self, date_ref=None):
         domain = super()._get_contracts_to_invoice_domain(date_ref)
-        _logger.info("domain del super: %s", domain)
 
-        # Obtener el día de la semana actual (0 = Lunes, 1 = Martes, ..., 6 = Domingo).
+        # Get the current weekday (0 = Monday, 1 = Tuesday, ..., 6 = Sunday).
         today_weekday = datetime.now().weekday()
 
-        # Filtrar contratos que contienen el día actual.
+        # Filter contracts that contain the current day.
         domain.append("|")
         domain.append(("contract_dow_ids.dow", "=", today_weekday))
         domain.append(("contract_dow_ids", "=", False))
-
-        _logger.info("domain retornado: %s", domain)
         return domain

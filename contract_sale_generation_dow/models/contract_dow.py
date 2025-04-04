@@ -3,7 +3,7 @@ from odoo import fields, models
 
 class ContractDow(models.Model):
     """
-    Esta clase permite almacenar los días de la semana.
+    This class allows to store the days of the week.
     """
 
     _name = "contract.dow"

@@ -7,8 +7,11 @@
 # Copyright 2017 Angel Moya <angel.moya@pesol.es>
 # Copyright 2018 Therp BV <https://therp.nl>.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+import logging
 
 from odoo import _, api, fields, models
+
+_logger = logging.getLogger(__name__)
 
 
 class ContractContract(models.Model):
@@ -25,7 +28,6 @@ class ContractContract(models.Model):
                 "origin": self.name,
                 "company_id": self.company_id.id,
                 "user_id": self.partner_id.user_id.id,
-                "analytic_account_id": self.group_id.id,
             }
         )
         if self.payment_term_id:

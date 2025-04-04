@@ -1,8 +1,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from freezegun import freeze_time
+
 
 from odoo import fields
-from odoo.tests import Form
 
 
 def to_date(date):
@@ -26,7 +25,6 @@ class ContractSaleDowCommon:
         cls.fiscal_position_id = cls.env["account.fiscal.position"].create(
             {"name": "Contracts"}
         )
-        contract_date = "2020-01-15"
         cls.pricelist = cls.env["product.pricelist"].create(
             {"name": "pricelist for contract tests"}
         )
@@ -83,53 +81,9 @@ class ContractSaleDowCommon:
                 "pricelist_id": cls.partner.property_product_pricelist.id,
                 "generation_type": "sale",
                 "sale_autoconfirm": False,
-                "group_id": cls.analytic_account.id,
                 "date_start": "2020-01-15",
-                "contract_dow_ids": [(6, 0, [cls.dow_monday.id, cls.dow_tuesday.id])],
-            }
-        )
-        cls.line_vals = {
-            "name": "Services from #START# to #END#",
-            "product_id": cls.product_1.id,
-            "uom_id": cls.product_1.uom_id.id,
-            "quantity": 1,
-            "price_unit": 100,
-            "discount": 50,
-            "recurring_rule_type": "monthly",
-            "recurring_interval": 1,
-            "date_start": "2020-01-01",
-            "recurring_next_date": "2020-01-15",
-            "display_type": False,
-        }
-        # discount_line_group_id = cls.env.ref("product.group_discount_per_so_line")
-        # uom_group_id = cls.env.ref("uom.group_uom")
-        # cls.env.user.groups_id = [
-        #     (4, discount_line_group_id.id),
-        #     (4, uom_group_id.id)
-        # ]
-
-        with Form(cls.contract) as contract_form, freeze_time(contract_date):
-            contract_form.contract_template_id = cls.template
-            contract_form.line_recurrence = True
-            with contract_form.contract_line_ids.new() as line_form:
-                line_form.product_id = cls.product_1
-                line_form.name = "Services from #START# to #END#"
-                line_form.quantity = 1
-                line_form.price_unit = 100.0
-                line_form.discount = 50
-                line_form.recurring_rule_type = "monthly"
-                line_form.recurring_interval = 1
-                line_form.date_start = "2020-01-15"
-                line_form.recurring_next_date = "2020-01-15"
-        cls.contract_line = cls.contract.contract_line_ids[1]
-
-        cls.contract2 = cls.env["contract.contract"].create(
-            {
-                "name": "Test Contract 2",
-                "generation_type": "sale",
-                "partner_id": cls.partner.id,
-                "pricelist_id": cls.partner.property_product_pricelist.id,
                 "contract_type": "purchase",
+                "contract_dow_ids": [(6, 0, [cls.dow_monday.id, cls.dow_tuesday.id])],
                 "contract_line_ids": [
                     (
                         0,
@@ -149,6 +103,5 @@ class ContractSaleDowCommon:
                         },
                     )
                 ],
-                "contract_dow_ids": [(6, 0, [cls.dow_monday.id])],
             }
         )
