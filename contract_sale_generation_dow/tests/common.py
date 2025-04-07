@@ -76,7 +76,7 @@ class ContractSaleDowCommon:
 
         cls.contract = cls.env["contract.contract"].create(
             {
-                "name": "Test Contract",
+                "name": "Test Contract Recurring",
                 "partner_id": cls.partner.id,
                 "pricelist_id": cls.partner.property_product_pricelist.id,
                 "generation_type": "sale",
@@ -84,6 +84,7 @@ class ContractSaleDowCommon:
                 "date_start": "2020-01-15",
                 "contract_type": "purchase",
                 "contract_dow_ids": [(6, 0, [cls.dow_monday.id, cls.dow_tuesday.id])],
+                "skip_on_holidays": False,
                 "contract_line_ids": [
                     (
                         0,

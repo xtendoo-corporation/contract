@@ -23,51 +23,51 @@ msgstr "Contrato"
 #. module: contract_sale_generation_dow
 #: model:ir.model,name:contract_sale_generation_dow.model_contract_dow
 msgid "Contract Days of the Week"
-msgstr ""
+msgstr "Días de Contrato de la Semana"
 
 #. module: contract_sale_generation_dow
 #: model:ir.model.fields,field_description:contract_sale_generation_dow.field_contract_dow__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: contract_sale_generation_dow
 #: model:ir.model.fields,field_description:contract_sale_generation_dow.field_contract_dow__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: contract_sale_generation_dow
 #: model:ir.model.fields,field_description:contract_sale_generation_dow.field_contract_contract__contract_dow_ids
 #: model:ir.model.fields,field_description:contract_sale_generation_dow.field_contract_dow__name
 #: model_terms:ir.ui.view,arch_db:contract_sale_generation_dow.contract_contract_form_view_recurring_sale_dow_form
 msgid "Days of the Week"
-msgstr ""
+msgstr "Días de la Semana"
 
 #. module: contract_sale_generation_dow
 #: model:ir.model.fields,help:contract_sale_generation_dow.field_contract_contract__contract_dow_ids
 msgid "Days of the week when the contract should generate orders."
-msgstr ""
+msgstr "Días de la semana en los que el contrato debe generar pedidos."
 
 #. module: contract_sale_generation_dow
 #: model:ir.model.fields,field_description:contract_sale_generation_dow.field_contract_dow__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre para Mostrar"
 
 #. module: contract_sale_generation_dow
 #: model:ir.model.fields,field_description:contract_sale_generation_dow.field_contract_dow__dow
 msgid "Dow"
-msgstr ""
+msgstr "Día de la Semana"
 
 #. module: contract_sale_generation_dow
 #: model:ir.model.fields,field_description:contract_sale_generation_dow.field_contract_dow__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: contract_sale_generation_dow
 #: model:ir.model.fields,field_description:contract_sale_generation_dow.field_contract_dow__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización por"
 
 #. module: contract_sale_generation_dow
 #: model:ir.model.fields,field_description:contract_sale_generation_dow.field_contract_dow__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última actualización el"

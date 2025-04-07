@@ -26,4 +26,5 @@ class ContractContract(models.Model):
         domain.append("|")
         domain.append(("contract_dow_ids.dow", "=", today_weekday))
         domain.append(("contract_dow_ids", "=", False))
+
         return domain
