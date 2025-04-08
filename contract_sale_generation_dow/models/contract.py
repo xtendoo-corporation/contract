@@ -11,7 +11,7 @@ class ContractContract(models.Model):
 
     contract_dow_ids = fields.Many2many(
         comodel_name="contract.dow",
-        string="Days of the Week",
+        string="Days of the week",
         help="Days of the week when the contract should generate orders.",
     )
 
