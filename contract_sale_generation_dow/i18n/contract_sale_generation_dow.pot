@@ -22,7 +22,7 @@ msgstr ""
 
 #. module: contract_sale_generation_dow
 #: model:ir.model,name:contract_sale_generation_dow.model_contract_dow
-msgid "Contract Days of the Week"
+msgid "Contract Days of the week"
 msgstr ""
 
 #. module: contract_sale_generation_dow

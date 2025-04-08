@@ -10,7 +10,7 @@
                 <field
                     name="contract_dow_ids"
                     widget="many2many_tags"
-                    string="Days of the Week"
+                    string="Days of the week"
                 />
             </xpath>
         </field>
