@@ -58,11 +58,11 @@ class ContractContract(models.Model):
             "name": "Sales Orders",
             "res_model": "sale.order",
             "view_type": "form",
-            "view_mode": "tree,kanban,form,calendar,pivot,graph,activity",
+            "view_mode": "list,kanban,form,calendar,pivot,graph,activity",
             "domain": [("id", "in", self._get_related_sales().ids)],
         }
         if tree_view and form_view:
-            action["views"] = [(tree_view.id, "tree"), (form_view.id, "form")]
+            action["views"] = [(tree_view.id, "list"), (form_view.id, "form")]
         return action
 
     def recurring_create_sale(self):

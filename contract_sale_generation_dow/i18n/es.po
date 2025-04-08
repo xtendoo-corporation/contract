@@ -40,7 +40,7 @@ msgstr "Creado el"
 #: model:ir.model.fields,field_description:contract_sale_generation_dow.field_contract_dow__name
 #: model_terms:ir.ui.view,arch_db:contract_sale_generation_dow.contract_contract_form_view_recurring_sale_dow_form
 msgid "Days of the Week"
-msgstr "Días de la Semana"
+msgstr "Días de la semana"
 
 #. module: contract_sale_generation_dow
 #: model:ir.model.fields,help:contract_sale_generation_dow.field_contract_contract__contract_dow_ids
